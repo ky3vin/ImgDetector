@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # 비교에 사용할 이미지 불러오기(gray scale)
-img1 = cv2.imread('ImageDB/jh03.jpeg', 0)
-img2 = cv2.imread('TrainDB/T_jh03.jpeg', 0)
+img1 = cv2.imread('ImageDB/jh01.jpeg', 0)
+img2 = cv2.imread('TrainDB/T_jh01.jpg', 0)
 
 # ORB객체 생성, ORB 객체가 한 번에 검출하고자 하는 특징점의 개수는 5000개
 # cv2.ORB_create(최대 피처 수, 스케일 계수, 피라미드 레벨, 엣지 임곗값, 시작 피라미드 레벨, 비교점, 점수 방식, 패치 크기, FAST 임곗값)
@@ -24,12 +24,13 @@ imgKp2 = cv2.drawKeypoints(img2, kp2, None)
 
 # 전수 조사 매칭 클래스(cv2.BFMatcher)로 전수 조사 매칭을 사용
 # 전수 조사 매칭은 객체의 이미지와 객체가 포함된 이미지의 각 특징점을 모두 찾아 기술자를 활용
-bf = cv2.BFMatcher()
+bf = cv2.BFMatcher(cv2.NORM_HAMMING2)
 
 # 첫 번째 파라미터인 queryDescriptors를 기준으로 두 번째 파라미터인 trainDescriptors에 맞는 매칭을 찾음
 # 가장 비슷한 k개만큼의 매칭 값을 반환(k: 매칭할 근접 이웃 개수)
 matches = bf.knnMatch(des1, des2, k=2)
 
+# 정확도를 높이기 위해 첫 번째 이웃의 거리가 두 번째 이웃 거리의 75% 이내인 것만 추출
 good = []
 for m, n in matches:
     if m.distance < 0.75 * n.distance:
