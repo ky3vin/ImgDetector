@@ -21,7 +21,7 @@ def findDes(images):
         desList.append(des)
     return desList
 
-def findID(img, desList, thres=70):
+def findID(img, desList, thres=60):
    kp2, des2=orb.detectAndCompute(img,None)
    bf=cv2.BFMatcher()
    matchList=[]
@@ -43,7 +43,7 @@ def findID(img, desList, thres=70):
    return finalVal
 desList=findDes(images)
 
-img2=cv2.imread('TrainDB/T_jh03.jpeg', cv2.COLOR_BGR2GRAY)
+img2=cv2.imread('TrainDB/T_jh03_withTextAndTilt.jpeg', cv2.COLOR_BGR2GRAY)
 imgOriginal=img2.copy()
 id = findID(img2, desList)
 if id != -1:
