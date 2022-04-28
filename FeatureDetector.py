@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # 비교에 사용할 이미지 불러오기(gray scale)
-img1 = cv2.imread('ImageDB/jh03.jpeg', 0)
-img2 = cv2.imread('TrainDB/T_jh03_withTextAndTilt.jpeg', 0)
+img1 = cv2.imread('ImageDB/jh01.jpeg', 0)
+img2 = cv2.imread('TrainDB/T_jh01_withMany.jpeg', 0)
 
 # ORB객체 생성, ORB 객체가 한 번에 검출하고자 하는 특징점의 개수는 5000개
 # cv2.ORB_create(최대 피처 수, 스케일 계수, 피라미드 레벨, 엣지 임곗값, 시작 피라미드 레벨, 비교점, 점수 방식, 패치 크기, FAST 임곗값)
